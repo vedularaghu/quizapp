@@ -1,0 +1,5 @@
+get / -> render login and register page
+post /users/login -> login the user if succesfull, redirect to /users/dashboard
+post /users/register -> store the registered data, if succesfull redirect to /
+post /users/logout -> redirect to index page redirect to /
+get /users/dashboard -> Render the dashboard

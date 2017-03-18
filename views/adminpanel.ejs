@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>QUIZ</title>
+  </head>
+  <body onload='documentLoaded();'>
+    <form  action="/quiz/add" method="post" autocomplete="on">
+        <h1>QUIZ QUESTIONS</h1>
+        <p>
+            <label for="Question" class="question" data-icon="q" >Enter the question </label>
+            <input id="question" name="description" required="required" type="text" placeholder="question"/>
+        </p>
+        <p>
+            <label for="options" class="options" data-icon="o">a</label>
+            <input id="options" name="a" required="required" type="text" placeholder="a" />
+        </p>
+        <p>
+            <label for="options" class="options" data-icon="o">b</label>
+            <input id="options" name="b" required="required" type="text" placeholder="b" />
+        </p>
+        <p>
+            <label for="options" class="options" data-icon="o">c</label>
+            <input id="options" name="c" required="required" type="text" placeholder="c" />
+        </p>
+        <p>
+            <label for="options" class="options" data-icon="o">d</label>
+            <input id="options" name="d" required="required" type="text" placeholder="d" />
+        </p>
+        <p>
+            <label for="coption" class="coption" data-icon="o"> Correct option</label>
+            <input id="options" name="correct" required="required" type="text" placeholder="co" />
+        </p>
+        <p>
+            <label for="cid" class="cid" data-icon="cid"> Category Id</label>
+            <input id="cid" name="cid" required="required" type="number" placeholder="cid" />
+        </p>
+        <p>
+            <label for="qid" class="qid" data-icon="qid">Question Id</label>
+            <input id="qid" name="qid" required="required" type="number" placeholder="qid" />
+        </p>
+        <p class="Submit button">
+            <input type="submit" value="Submit" />
+        </p>
+    </form>
+    <div class="">
+      <h3 id='msg'></h3>
+    </div>
+    <script type="text/javascript">
+    var getUrlParameter = function getUrlParameter(sParam) {
+      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+      for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+              return sParameterName[1] === undefined ? true : sParameterName[1];
+          }
+      }
+    };
+    var documentLoaded = function(){
+      var element = document.getElementById('msg');
+      var x = getUrlParameter('msg');
+      if(x){
+        element.innerHTML = x;
+      }
+    };
+    </script>
+
+  </body>
+</html>
