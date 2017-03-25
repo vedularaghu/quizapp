@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>QUIZ</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+  </head>
+  <body>
+    <div class="row">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-5"><h3><b>1.1</h3></div>
+      </div>
+      <form class="" action="/quiz/submit/<%= cid%>/<%= qid%>" method="post">
+        <% for(var i = 0; i < quizzes.length; i ++){
+          var quiz = quizzes[i];
+          %>
+          <div class="row">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-4"><h3><%=quiz.description%></h3></div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-md-offset-2 ">
+                <div class="col-md-2 col-md-offset-2 radio">
+                  <label><input type="radio" value="a" name="q_no_<%=i%>"><%=quiz.options[0]%></label>
+                </div>
+              </div>
+              <div class="col-md-2 col-md-offset-2 ">
+                <div class="col-md-2 col-md-offset-2 radio">
+                  <label><input type="radio" value="b" name="q_no_<%=i%>"><%=quiz.options[1]%></label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-md-offset-2 ">
+                <div class="col-md-2 col-md-offset-2 radio">
+                  <label><input type="radio" value="c" name="q_no_<%=i%>"><%=quiz.options[2]%></label>
+                </div>
+              </div>
+              <div class="col-md-2 col-md-offset-2 ">
+                <div class="col-md-2 col-md-offset-2 radio">
+                  <label><input type="radio" value="d" name="q_no_<%=i%>"><%=quiz.options[3]%></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+          <label><input type="submit" name="" value="submit"></label>
+      </form>
+
+  </body>
+  <script type="text/javascript" src="/javascripts/jquery-3.2.0.min.js"></script>
+  <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+</html>

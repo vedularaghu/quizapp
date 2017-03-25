@@ -51,8 +51,33 @@ router.get('/logout',function(req,res,next){
   delete req.session.user;
   res.redirect('/');
 });
-router.get('/dashboard',authenticate,function(req,res,next){
-  res.render('dashboard');
+router.get('/dashboard', authenticate, function(req,res,next){
+  User.findOne({name:req.session.user},function(err , user){
+    if(err){
+      console.log(err);
+      res.send(err);
+    }else{
+      res.render('dashboard',{users:user});
+    }
+  });
 });
+router.get('/dashboard2', authenticate, function(req,res,next){
+  User.findOne({name:req.session.user},function(err , user){
+    if(err){
+      console.log(err);
+      res.send(err);
+    }else{
+      console.log(user);
+      res.render('dashboard2',{users:user});
+    }
+  });
+});
+router.get('/dashboard3',function(req,res,next){
+  res.render('dashboard3');
+});
+router.get('/dashboard4',function(req,res,next){
+  res.render('dashboard4');
+});
+
 
 module.exports = router;
