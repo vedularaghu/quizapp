@@ -10,6 +10,17 @@ function authenticate(req,res,next){
   }
 }
 
+function assign(obj , keyPath , value){
+  LastKeyIndex = keyPath.length-1;
+  for (var i = 0; i < LastKeyIndex; i++) {
+    Key = keyPath[i];
+    if(!(Key in obj))
+      obj[Key] = {}
+    obj = obj[Key];
+    }
+  obj[keyPath[LastKeyIndex]] = value;
+  }
+
 router.post('/add', function(req,res,next){
   var options = [req.body.a,req.body.b,req.body.c,req.body.d];
   var newquiz = new quiz({
@@ -53,27 +64,28 @@ router.post('/submit/:cid/:qid',authenticate , function(req,res,next){
       for (var i = 0; i < questions.length; i++) {
           if(req.body['q_no_'+i]==questions[i].correct){
           score++;
+          // console.log(score);
         }
       }
-      User.findOne({name: req.session.user} , function(err, found_user){
+    var sc = obj.cid+'_'+obj.qid;
+    console.log(obj.cid+'_'+obj.qid);
+    var obj1 = {
+      $set : { }
+    };
+    obj1.$set['scores.'+sc] = score;
+    console.log();
+    User.update({name: req.session.user} ,obj1,  function(err, found_user){
         if(err){
           console.log(err);
           res.send(err);
         }else{
-          found_user.scores[obj.cid+'_'+obj.qid] = score;
-          found_user.save(function(err , new_users){
-            if(err){
-              console.log(err);
-              res.send(err);
-            }else {
-              console.log("Second");
-              console.log(new_users);
+
+              console.log(found_user);
               res.redirect('/users/dashboard');
             }
           });
-        }
-      });
-    }
+          //res.redirect('/users/dashboard');
+      }
   });
 });
 
